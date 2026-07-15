@@ -1,0 +1,24 @@
+/* NoArticles component */
+.no-articles {
+  text-align: center;
+  padding: 60px 24px;
+  color: var(--color-text-secondary);
+}
+
+.no-articles__icon {
+  font-size: 3.5rem;
+  margin-bottom: 16px;
+}
+
+.no-articles__title {
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: var(--color-text);
+  margin-bottom: 8px;
+}
+
+.no-articles__message {
+  font-size: 0.9rem;
+  max-width: 360px;
+  margin: 0 auto;
+}

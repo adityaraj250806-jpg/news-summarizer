@@ -1,0 +1,108 @@
+/* My Summaries page */
+.my-summaries__header {
+  margin-bottom: 28px;
+}
+
+.my-summaries__title {
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: var(--color-text);
+  margin-bottom: 4px;
+}
+
+.my-summaries__subtitle {
+  font-size: 0.9rem;
+  color: var(--color-text-secondary);
+}
+
+/* Empty state */
+.my-summaries__empty {
+  text-align: center;
+  padding: 60px 24px;
+  color: var(--color-text-secondary);
+}
+
+.my-summaries__empty-icon {
+  font-size: 3.5rem;
+  margin-bottom: 16px;
+}
+
+.my-summaries__empty-title {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--color-text);
+  margin-bottom: 8px;
+}
+
+.my-summaries__empty-message {
+  font-size: 0.9rem;
+  margin-bottom: 20px;
+}
+
+/* Summary cards list */
+.summaries-list {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* Individual saved summary card */
+.summary-item {
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-sm);
+  padding: 20px 22px;
+}
+
+.summary-item__header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 14px;
+}
+
+.summary-item__info {
+  flex: 1;
+}
+
+.summary-item__source {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--color-primary);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  margin-bottom: 4px;
+}
+
+.summary-item__title {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--color-text);
+  line-height: 1.4;
+}
+
+.summary-item__saved-at {
+  font-size: 0.75rem;
+  color: var(--color-text-secondary);
+  white-space: nowrap;
+}
+
+.summary-item__summary {
+  background-color: var(--color-primary-light);
+  border-left: 3px solid var(--color-primary);
+  border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+  padding: 14px 16px;
+  font-size: 0.9rem;
+  color: var(--color-text);
+  line-height: 1.7;
+  white-space: pre-wrap;
+  margin-bottom: 14px;
+}
+
+.summary-item__actions {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
