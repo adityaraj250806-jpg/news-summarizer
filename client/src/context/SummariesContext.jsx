@@ -1,5 +1,6 @@
 import React, { createContext, useContext, useState, useEffect } from 'react'
 import { useAuth } from './AuthContext'
+import { API_URL } from '../config'
 
 const SummariesContext = createContext(null)
 const STORAGE_KEY = 'saved_summaries'
@@ -10,7 +11,7 @@ export function SummariesProvider({ children }) {
 
   useEffect(() => {
     if (token) {
-      fetch('http://localhost:5000/api/summaries', {
+      fetch(`${API_URL}/api/summaries`, {
         headers: { Authorization: `Bearer ${token}` }
       })
         .then(res => res.json())
@@ -68,7 +69,7 @@ export function SummariesProvider({ children }) {
           description: article.description,
           summaryText
         }
-        const res = await fetch('http://localhost:5000/api/summaries', {
+        const res = await fetch(`${API_URL}/api/summaries`, {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
@@ -104,7 +105,7 @@ export function SummariesProvider({ children }) {
       const summaryToDelete = summaries.find(s => s.id === articleUrl)
       if (summaryToDelete && summaryToDelete._id) {
         try {
-          await fetch(`http://localhost:5000/api/summaries/${summaryToDelete._id}`, {
+          await fetch(`${API_URL}/api/summaries/${summaryToDelete._id}`, {
             method: 'DELETE',
             headers: { Authorization: `Bearer ${token}` }
           })

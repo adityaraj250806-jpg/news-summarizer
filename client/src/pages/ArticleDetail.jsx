@@ -4,6 +4,7 @@ import { summarizeArticle } from '../services/geminiApi'
 import { useSummaries } from '../context/SummariesContext'
 import { formatDate } from '../utils/formatDate'
 import Spinner from '../components/Spinner'
+import { API_URL } from '../config'
 import './ArticleDetail.css'
 
 function ArticleDetail() {
@@ -36,7 +37,7 @@ function ArticleDetail() {
     const fetchFullText = async () => {
       setLoadingText(true)
       try {
-        const res = await fetch(`http://localhost:5000/api/scrape?url=${encodeURIComponent(article.url)}`)
+        const res = await fetch(`${API_URL}/api/scrape?url=${encodeURIComponent(article.url)}`)
         if (!res.ok) throw new Error('Scraping failed')
         const data = await res.json()
         setFullText(data.content)

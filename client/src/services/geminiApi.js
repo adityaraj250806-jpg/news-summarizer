@@ -1,4 +1,6 @@
-const GEMINI_URL = 'http://localhost:5000/api/summarize'
+import { API_URL } from '../config'
+
+const GEMINI_URL = `${API_URL}/api/summarize`
 
 export async function summarizeArticle(articleText) {
   const requestBody = { articleText }
