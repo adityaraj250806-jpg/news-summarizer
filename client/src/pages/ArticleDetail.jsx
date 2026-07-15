@@ -116,6 +116,52 @@ function ArticleDetail() {
 
       <h1 className="article-detail__title">{article.title}</h1>
 
+      <div className="article-detail__actions" style={{ marginBottom: '1.5rem' }}>
+        <button
+          id="summarize-btn"
+          className="btn btn-primary"
+          onClick={handleSummarize}
+          disabled={summarizing}
+        >
+          {summarizing ? 'Summarizing...' : '✨ Summarise'}
+        </button>
+
+        <a
+          id="read-full-article-btn"
+          href={article.url}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="btn btn-outline"
+        >
+          Read Source
+        </a>
+      </div>
+
+      <div className="summarizer" style={{ marginBottom: '2rem' }}>
+        <h2 className="summarizer__title">AI Summary</h2>
+
+        {summarizing && <Spinner />}
+
+        {summaryError && (
+          <div className="summarizer__error" role="alert">
+            Error: {summaryError}
+          </div>
+        )}
+
+        {summary && (
+          <div className="summary-card">
+            <p className="summary-card__heading">Gemini Summary</p>
+            <div className="summary-card__content">{summary}</div>
+          </div>
+        )}
+
+        {!summarizing && !summary && !summaryError && (
+          <p style={{ color: 'var(--color-text-secondary)', fontSize: '0.875rem' }}>
+            Click "Summarise" above to generate a 3-bullet AI summary of this article.
+          </p>
+        )}
+      </div>
+
       {article.description && (
         <p className="article-detail__description">{article.description}</p>
       )}
@@ -141,55 +187,12 @@ function ArticleDetail() {
         )}
       </div>
 
-      <div className="article-detail__actions">
-        <button
-          id="summarize-btn"
-          className="btn btn-primary"
-          onClick={handleSummarize}
-          disabled={summarizing}
-        >
-          {summarizing ? 'Summarizing...' : '✨ Summarise'}
-        </button>
 
-        <a
-          id="read-full-article-btn"
-          href={article.url}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="btn btn-outline"
-        >
-          Read Source
-        </a>
-      </div>
 
       {alreadySaved && !summary && (
         <p className="saved-badge">Summary already saved in My Summaries</p>
       )}
 
-      <div className="summarizer">
-        <h2 className="summarizer__title">AI Summary</h2>
-
-        {summarizing && <Spinner />}
-
-        {summaryError && (
-          <div className="summarizer__error" role="alert">
-            Error: {summaryError}
-          </div>
-        )}
-
-        {summary && (
-          <div className="summary-card">
-            <p className="summary-card__heading">Gemini Summary</p>
-            <div className="summary-card__content">{summary}</div>
-          </div>
-        )}
-
-        {!summarizing && !summary && !summaryError && (
-          <p style={{ color: 'var(--color-text-secondary)', fontSize: '0.875rem' }}>
-            Click "Summarise" above to generate a 3-bullet AI summary of this article.
-          </p>
-        )}
-      </div>
     </article>
   )
 }

@@ -69,6 +69,11 @@
   background-color: var(--color-primary-light);
 }
 
+.navbar__auth {
+  margin-left: auto;
+  flex-shrink: 0;
+}
+
 /* Search form – takes remaining space */
 .navbar__search {
   display: flex;
@@ -116,26 +121,13 @@
   background-color: var(--color-primary-dark);
 }
 
-/* Mobile adjustments */
 @media (max-width: 640px) {
   .navbar__inner {
     padding: 0 12px;
     gap: 8px;
   }
-  
+
   .navbar__logo-text {
     display: none;
-  }
-
-  .navbar__search {
-    max-width: unset;
-  }
-
-  .navbar__search-input {
-    padding: 0 8px;
-  }
-
-  .navbar__search-btn {
-    padding: 0 10px;
   }
 }

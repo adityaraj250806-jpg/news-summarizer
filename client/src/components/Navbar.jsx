@@ -1,19 +1,10 @@
-import React, { useState } from 'react'
-import { NavLink, useNavigate } from 'react-router-dom'
+import React from 'react'
+import { NavLink } from 'react-router-dom'
+import { useAuth } from '../context/AuthContext'
 import './Navbar.css'
 
 function Navbar() {
-  const [searchQuery, setSearchQuery] = useState('')
-  const navigate = useNavigate()
-
-  const handleSearch = (e) => {
-    e.preventDefault()
-    const trimmed = searchQuery.trim()
-    if (!trimmed) return
-
-    navigate('/', { state: { searchQuery: trimmed } })
-    setSearchQuery('')
-  }
+  const { user, logout } = useAuth()
 
   return (
     <nav className="navbar" role="navigation" aria-label="Main navigation">
@@ -43,25 +34,26 @@ function Navbar() {
           </NavLink>
         </div>
 
-        <form className="navbar__search" onSubmit={handleSearch} role="search">
-          <input
-            id="navbar-search-input"
-            type="search"
-            className="navbar__search-input"
-            placeholder="Search news..."
-            value={searchQuery}
-            onChange={(e) => setSearchQuery(e.target.value)}
-            aria-label="Search articles"
-          />
-          <button
-            id="navbar-search-btn"
-            type="submit"
-            className="navbar__search-btn"
-            aria-label="Submit search"
-          >
-            Search
-          </button>
-        </form>
+        <div className="navbar__auth">
+          {user ? (
+            <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
+              <span style={{ fontSize: '0.9rem', color: 'var(--color-text-secondary)' }}>
+                Hi, {user.name.split(' ')[0]}
+              </span>
+              <button
+                onClick={logout}
+                className="btn btn-outline"
+                style={{ padding: '0.4rem 0.8rem', fontSize: '0.875rem' }}
+              >
+                Logout
+              </button>
+            </div>
+          ) : (
+            <NavLink to="/login" className="btn btn-primary" style={{ padding: '0.4rem 0.8rem', fontSize: '0.875rem' }}>
+              Login
+            </NavLink>
+          )}
+        </div>
       </div>
     </nav>
   )

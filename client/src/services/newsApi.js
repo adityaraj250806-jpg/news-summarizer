@@ -1,15 +1,9 @@
 import axios from 'axios'
 
-const API_KEY = import.meta.env.VITE_NEWS_API_KEY
-const BASE_URL = 'https://newsapi.org/v2'
+const BASE_URL = 'http://localhost:5000/api/news'
 
 const newsApi = axios.create({
   baseURL: BASE_URL,
-  params: {
-    apiKey: API_KEY,
-    language: 'en',
-    pageSize: 20,
-  },
 })
 
 export async function getTopHeadlines(category = 'general') {
@@ -21,10 +15,7 @@ export async function getTopHeadlines(category = 'general') {
 
 export async function searchNews(query) {
   const response = await newsApi.get('/everything', {
-    params: {
-      q: query,
-      sortBy: 'publishedAt',
-    },
+    params: { q: query },
   })
   return response.data.articles
 }

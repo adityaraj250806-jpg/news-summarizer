@@ -13,17 +13,23 @@ async function getSummaries(req, res) {
 
 async function saveSummary(req, res) {
   try {
-    const { title, url, urlToImage, source, author, publishedAt, description, summaryText } =
-      req.body
+    const { title, url, urlToImage, source, author, publishedAt, description, summaryText } = req.body
+
+    if (!title || !url || !summaryText) {
+      return res.status(400).json({ message: 'title, url, and summaryText are required.' })
+    }
+
+    const sourceName = typeof source === 'object' ? source?.name : source
 
     const saved = await SavedArticle.findOneAndUpdate(
       { user: req.userId, url },
-      { title, url, urlToImage, source, author, publishedAt, description, summaryText },
+      { title, url, urlToImage, source: sourceName, author, publishedAt, description, summaryText },
       { upsert: true, new: true }
     )
 
     res.status(201).json({ message: 'Summary saved.', saved })
   } catch (error) {
+    console.error('saveSummary error:', error.message)
     res.status(500).json({ message: 'Failed to save summary.', error: error.message })
   }
 }

@@ -8,9 +8,10 @@ async function scrapeArticle(req, res) {
       return res.status(400).json({ message: 'URL is required.' })
     }
 
-    const { default: fetch } = await import('node-fetch')
+
 
     const response = await fetch(url, {
+      signal: AbortSignal.timeout(2500),
       headers: {
         'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/121.0.0.0 Safari/537.36',
         'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,*/*;q=0.8',

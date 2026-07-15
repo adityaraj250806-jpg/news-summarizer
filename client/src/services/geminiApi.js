@@ -1,18 +1,7 @@
-const GEMINI_API_KEY = import.meta.env.VITE_GEMINI_API_KEY
-
-const MODEL = 'gemini-3.5-flash'
-const GEMINI_URL = `https://generativelanguage.googleapis.com/v1beta/models/${MODEL}:generateContent?key=${GEMINI_API_KEY}`
+const GEMINI_URL = 'http://localhost:5000/api/summarize'
 
 export async function summarizeArticle(articleText) {
-  const prompt = `Summarize the following article in exactly 3 concise bullet points:\n\n${articleText}`
-
-  const requestBody = {
-    contents: [
-      {
-        parts: [{ text: prompt }],
-      },
-    ],
-  }
+  const requestBody = { articleText }
 
   const response = await fetch(GEMINI_URL, {
     method: 'POST',
@@ -23,13 +12,13 @@ export async function summarizeArticle(articleText) {
   const data = await response.json()
 
   if (!response.ok) {
-    const errorMsg = data?.error?.message || `Gemini API error: ${response.status}`
+    const errorMsg = data?.message || `Summarize error: ${response.status}`
     throw new Error(errorMsg)
   }
 
-  const text = data?.candidates?.[0]?.content?.parts?.[0]?.text
+  const text = data?.summaryText
   if (!text) {
-    throw new Error('No summary returned from Gemini. The response may have been blocked.')
+    throw new Error('No summary returned from backend.')
   }
 
   return text
