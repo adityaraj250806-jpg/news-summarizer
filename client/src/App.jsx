@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import Navbar from './components/Navbar'
 import Home from './pages/Home'
@@ -8,8 +8,13 @@ import Login from './pages/Login'
 import Register from './pages/Register'
 import { SummariesProvider } from './context/SummariesContext'
 import { AuthProvider } from './context/AuthContext'
+import { API_URL } from './config'
 
 function App() {
+  useEffect(() => {
+    fetch(`${API_URL}/api/health`).catch(() => {})
+  }, [])
+
   return (
     <AuthProvider>
       <SummariesProvider>
